@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+<!--
+   <extension
+         point="org.eclipse.ui.popupMenus">
+      <viewerContribution
+            id="org.eclipse.fx.tools.viewer.contributions.searchFor"
+            targetID="#TextEditorContext">
+         <action
+               class="org.eclipse.fx.tools.SearchForAction"
+               icon="icons/google_favicon_16.png"
+               id="org.eclipse.fx.tools.actions.searchFor"
+               label="Search with Goolge"
+               menubarPath="additions">
+         </action>
+      </viewerContribution>
+      <objectContribution
+            adaptable="false"
+            id="org.eclipse.fx.tools.object.Contribution0"
+            objectClass="org.eclipse.core.runtime.IAdaptable">
+         <action
+               class="org.eclipse.fx.tools.ShowInExplorerAction"
+               enablesFor="1"
+               id="org.eclipse.fx.tools.action3"
+               label="Open Folder"
+               menubarPath="additions">
+         </action>
+      </objectContribution>
+   </extension>
+   -->
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            allPopups="false"
+            locationURI="popup:org.eclipse.ui.popup.any?after=additions">
+         <command
+               commandId="org.eclipse.fx.tools.openExplorer"
+               label="%showInFileManager"
+               style="push">
+            <visibleWhen>
+			    <iterate>
+			       <adapt type="org.eclipse.core.resources.IResource">
+			       </adapt>
+			    </iterate>
+			</visibleWhen>
+         </command>
+         <command
+               commandId="org.eclipse.fx.tools.commands.searchWithGoogle"
+               label="%searchWithGoogle"
+               style="push">
+               <!--
+            <visibleWhen
+                  checkEnabled="false">
+               <with
+                     variable="selection">
+                  <iterate
+                        ifEmpty="false"
+                        operator="or">
+                     <instanceof
+                           value="java.lang.String">
+                     </instanceof>
+                  </iterate>
+               </with>
+            </visibleWhen>
+            -->
+            <visibleWhen>
+               <with
+                     variable="selection">
+                  <instanceof
+                        value="org.eclipse.jface.text.ITextSelection">
+                  </instanceof>
+               </with>
+			</visibleWhen>
+         </command>
+         <command
+               commandId="org.eclipse.fx.tools.commands.copyLocation"
+               label="%copyLocation"
+               style="push">
+            <visibleWhen>
+               <iterate>
+                  <adapt
+                        type="org.eclipse.core.resources.IResource">
+                  </adapt>
+               </iterate>
+            </visibleWhen>
+         </command>
+         <command
+               commandId="org.eclipse.fx.tools.commands.openCommandLine"
+               label="%openCommandLine"
+               style="push">
+            <visibleWhen>
+               <iterate>
+                  <adapt
+                        type="org.eclipse.core.resources.IResource">
+                  </adapt>
+               </iterate>
+            </visibleWhen>
+         </command>
+      </menuContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            defaultHandler="org.eclipse.fx.tools.OpenFileBrowserHandler"
+            id="org.eclipse.fx.tools.openExplorer"
+            name="Open File Manager">
+      </command>
+      <command
+            defaultHandler="org.eclipse.fx.tools.SearchWithGoogleHandler"
+            id="org.eclipse.fx.tools.commands.searchWithGoogle"
+            name="Search with Google">
+      </command>
+      <command
+            defaultHandler="org.eclipse.fx.tools.CopyPathHandler"
+            id="org.eclipse.fx.tools.commands.copyLocation"
+            name="Copy Location">
+      </command>
+      <command
+            defaultHandler="org.eclipse.fx.tools.OpenCommandLineHandler"
+            id="org.eclipse.fx.tools.commands.openCommandLine"
+            name="Open Terminal">
+      </command>
+   </extension>
+
+</plugin>
