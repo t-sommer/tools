@@ -1,7 +1,0 @@
-Manifest-Version: 1.0
-Eclipse-PlatformFilter: (osgi.os=macosx)
-Bundle-ManifestVersion: 2
-Bundle-Name: Mac
-Bundle-SymbolicName: org.eclipse.fx.tools.mac
-Bundle-Version: 1.0.0.qualifier
-Fragment-Host: org.eclipse.fx.tools

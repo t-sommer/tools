@@ -1,4 +1,4 @@
-package org.eclipse.fx.tools;
+package com.torstensommer.tools;
 
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;

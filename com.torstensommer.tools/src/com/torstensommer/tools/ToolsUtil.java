@@ -1,4 +1,4 @@
-package org.eclipse.fx.tools;
+package com.torstensommer.tools;
 
 import java.io.IOException;
 import java.net.MalformedURLException;

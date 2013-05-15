@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Eclipse-PlatformFilter: (osgi.os=win32)
+Bundle-ManifestVersion: 2
+Bundle-Name: Win32
+Bundle-SymbolicName: com.torstensommer.tools.win32
+Bundle-Version: 1.0.0.qualifier
+Fragment-Host: com.torstensommer.tools
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7

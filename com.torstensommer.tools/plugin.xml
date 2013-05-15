@@ -102,22 +102,22 @@
    <extension
          point="org.eclipse.ui.commands">
       <command
-            defaultHandler="org.eclipse.fx.tools.OpenFileBrowserHandler"
+            defaultHandler="com.torstensommer.tools.OpenFileBrowserHandler"
             id="org.eclipse.fx.tools.openExplorer"
             name="Open File Manager">
       </command>
       <command
-            defaultHandler="org.eclipse.fx.tools.SearchWithGoogleHandler"
+            defaultHandler="com.torstensommer.tools.SearchWithGoogleHandler"
             id="org.eclipse.fx.tools.commands.searchWithGoogle"
             name="Search with Google">
       </command>
       <command
-            defaultHandler="org.eclipse.fx.tools.CopyPathHandler"
+            defaultHandler="com.torstensommer.tools.CopyPathHandler"
             id="org.eclipse.fx.tools.commands.copyLocation"
             name="Copy Location">
       </command>
       <command
-            defaultHandler="org.eclipse.fx.tools.OpenCommandLineHandler"
+            defaultHandler="com.torstensommer.tools.OpenCommandLineHandler"
             id="org.eclipse.fx.tools.commands.openCommandLine"
             name="Open Terminal">
       </command>

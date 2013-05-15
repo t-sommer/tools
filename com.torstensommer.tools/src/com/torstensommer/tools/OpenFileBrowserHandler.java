@@ -1,4 +1,6 @@
-package org.eclipse.fx.tools;
+package com.torstensommer.tools;
+
+import java.io.File;
 
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
@@ -8,51 +10,44 @@ import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
-import org.eclipse.swt.dnd.Clipboard;
-import org.eclipse.swt.dnd.TextTransfer;
-import org.eclipse.swt.dnd.Transfer;
 import org.eclipse.ui.handlers.HandlerUtil;
 
-public class CopyPathHandler extends AbstractHandler {
+public class OpenFileBrowserHandler extends AbstractHandler {
 
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		ISelection selection = HandlerUtil.getActiveWorkbenchWindow(event)
 				.getActivePage().getSelection();
-
+		
 		if (selection instanceof IStructuredSelection) {
-			Object firstElement = ((IStructuredSelection) selection)
-					.getFirstElement();
+			Object firstElement = ((IStructuredSelection) selection).getFirstElement();
 
 			String path = null;
 
 			if (firstElement instanceof IResource) {
 				IResource resource = (IResource) firstElement;
-				IPath location = resource.getLocation();
-				path = location.toOSString();
+				path = getContainerPath(resource);
+
 			} else if (firstElement instanceof IAdaptable) {
 				IAdaptable ad = (IAdaptable) firstElement;
+
 				IResource resource = (IResource) ad.getAdapter(IResource.class);
-				IPath location = resource.getLocation();
-				path = location.toOSString();
+				if (resource != null)
+					path = getContainerPath(resource);
 			}
 
-			if (path != null) {
-				Clipboard clipboard = null;
-				try {
-					clipboard = new Clipboard(HandlerUtil.getActiveShell(event)
-							.getDisplay());
-					clipboard.setContents(new Object[] { path },
-							new Transfer[] { TextTransfer.getInstance() });
-				} finally {
-					if (clipboard != null) {
-						clipboard.dispose();
-					}
-				}
-			}
+			if (path != null)
+				ToolsUtil.openExplorer(path);
 		}
-
+		
 		return null;
+	}
+	
+	static String getContainerPath(IResource resource) {
+		IPath location = resource.getLocation();
+		String osString = location.toOSString();
+		File file = new File(osString);
+		return file.isFile() ? file.getParent() : osString;
 	}
 
 }
