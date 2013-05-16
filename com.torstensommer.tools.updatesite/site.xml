@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature url="features/com.torstensommer.tools.feature_1.0.0.qualifier.jar" id="com.torstensommer.tools.feature" version="1.0.0.qualifier">
+      <category name="tools"/>
+   </feature>
+   <category-def name="tools" label="Context Menu Extensions"/>
+</site>
