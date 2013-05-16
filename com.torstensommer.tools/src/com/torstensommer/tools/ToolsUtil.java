@@ -10,6 +10,7 @@
  *******************************************************************************/
 package com.torstensommer.tools;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -39,7 +40,7 @@ public class ToolsUtil {
 		try {
 			String os = Platform.getOS();
 			String command = null;
-			
+
 			if (Platform.OS_MACOSX.equals(os))
 				command = "open " + path;
 			else if (Platform.OS_WIN32.equals(os))
@@ -57,22 +58,16 @@ public class ToolsUtil {
 			e.printStackTrace();
 		}
 	}
-	
+
 	static void openCommandLine(String path) {
 		Runtime runtime = Runtime.getRuntime();
 		try {
 			String os = Platform.getOS();
-			String command = null;
-			
-			if (Platform.OS_MACOSX.equals(os))
-				command = "open -a Terminal " + path;
-			else if (Platform.OS_WIN32.equals(os))
-				command = "explorer " + path;
 
-			if (command != null) {
-				Process process = runtime.exec(command);
-				process.waitFor();
-			}
+			if (Platform.OS_MACOSX.equals(os))
+				runtime.exec("open -a Terminal " + path).waitFor();
+			else if (Platform.OS_WIN32.equals(os))
+				runtime.exec("cmd.exe /c start cmd", null, new File(path)).waitFor();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
